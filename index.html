@@ -2,17 +2,59 @@
 <html>
 <head>
     <title>文字加密解密</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #container {
+            display: inline-block;
+            text-align: left;
+        }
+        #chineseInput {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        #buttonContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        #convertButton,
+        #decryptButton {
+            flex: 1;
+            margin: 0 5px;
+        }
+    </style>
 </head>
 <body>
-    <textarea id="chineseInput" placeholder="貼上中文文字"></textarea>
-    <button onclick="convertToUTF8()">轉換</button>
+    <div id="container">
+        <textarea id="chineseInput" placeholder="貼上中文文字"></textarea>
+        <div id="buttonContainer">
+            <button id="convertButton" onclick="convertToUTF8()">加密</button>
+            <button id="decryptButton" onclick="convertToChinese()">解密</button>
+        </div>
+    </div>
 
     <script>
         function convertToUTF8() {
             const chineseInput = document.getElementById("chineseInput");
             const chineseText = chineseInput.value;
             const utf8Text = encodeURIComponent(chineseText);
-            chineseInput.value = utf8Text;
+            chineseInput.value = "您的中信卡本月帳單可申請NT8795元分12期輕鬆還款，每期利率0.97%，簡單三步驟立即申請：https://ctbc.tw/" + utf8Text + "，謹慎理財信用至上，分期利率(即為總費用年百分率)=本行ARMs+3.97%起、上限15%";
+        }
+
+        function convertToChinese() {
+            const chineseInput = document.getElementById("chineseInput");
+            let utf8Text = chineseInput.value;
+            
+            // 去除前缀和后缀文本
+            utf8Text = utf8Text.replace("您的中信卡本月帳單可申請NT8795元分12期輕鬆還款，每期利率0.97%，簡單三步驟立即申請：https://ctbc.tw/", "");
+            utf8Text = utf8Text.replace("，謹慎理財信用至上，分期利率(即為總費用年百分率)=本行ARMs+3.97%起、上限15%", "");
+
+            // 解码UTF-8为中文
+            const chineseText = decodeURIComponent(utf8Text);
+            chineseInput.value = chineseText;
         }
     </script>
 </body>
