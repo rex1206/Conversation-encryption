@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>中文转UTF-8</title>
+</head>
+<body>
+    <textarea id="chineseInput" placeholder="粘贴中文文本"></textarea>
+    <button onclick="convertToUTF8()">转换为UTF-8</button>
+    <div id="utf8Output"></div>
+
+    <script>
+        function convertToUTF8() {
+            const chineseText = document.getElementById("chineseInput").value;
+            const utf8Text = encodeURIComponent(chineseText);
+            document.getElementById("utf8Output").innerText = utf8Text;
+        }
+    </script>
+</body>
+</html>
